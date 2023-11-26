@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.demo.domain.User;
 import com.project.demo.dto.Product;
 import com.project.demo.dto.Products;
 import com.project.demo.service.IProductService;
