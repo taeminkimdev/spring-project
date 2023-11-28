@@ -1,22 +1,18 @@
 package com.project.demo.repository;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 import org.springframework.stereotype.Component;
 
 import com.project.demo.domain.User;
-import com.project.demo.exceptions.NotExistUser;
 
 @Component
-public class UserRepository{
-    public User findUser(String username) throws NotExistUser{
-        User user;
-        
-        try{
-            // DB 유저 데이터 불러오기
-            user = new User(1, "username1234", "hashedPassword", "김태민");
-        } catch(Exception e){ // not found
-            throw new NotExistUser();
-        }
-        
-        return user;
-    }
+@Mapper
+public interface UserRepository {
+    @Select("SELECT id, username, password, name FROM user WHERE id == #{id}")
+    User findUserById(@Param("id") int id);
+    
+    @Select("SELECT id, username, password, name FROM user WHERE username == #{username}")
+    User findUserByUsername(@Param("username") String username);
 }
