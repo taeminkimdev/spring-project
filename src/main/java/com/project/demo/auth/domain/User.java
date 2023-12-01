@@ -1,4 +1,4 @@
-package com.project.demo.domain;
+package com.project.demo.auth.domain;
 
 public class User {
     private int id;

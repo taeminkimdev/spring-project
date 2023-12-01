@@ -1,11 +1,9 @@
-package com.project.demo.service;
-import com.project.demo.repository.UserRepository;
-
+package com.project.demo.auth.service;
 import org.springframework.stereotype.Component;
 
-import com.project.demo.domain.User;
+import com.project.demo.auth.domain.User;
+import com.project.demo.auth.service.IAuthService;
 import com.project.demo.exceptions.LoginFail;
-import com.project.demo.service.IAuthService;
 
 @Component
 public class AuthServiceImp implements IAuthService{

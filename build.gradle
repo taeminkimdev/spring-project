@@ -17,9 +17,9 @@ repositories {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-web-services'
-	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:3.0.2'
-	implementation 'com.mysql:mysql-connector-j'
+	implementation 'org.mybatis.spring.boot:mybatis-spring-boot-starter:2.1.4'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'mysql:mysql-connector-java:8.0.29'
 }
 
 tasks.named('bootBuildImage') {

@@ -1,14 +1,15 @@
-package com.project.demo.controller;
+package com.project.demo.auth.controller;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.demo.domain.User;
+import com.project.demo.auth.domain.User;
+import com.project.demo.auth.service.IAuthService;
+import com.project.demo.auth.service.AuthServiceImp;
+
 import com.project.demo.exceptions.LoginFail;
-import com.project.demo.service.AuthServiceImp;
-import com.project.demo.service.IAuthService;
 
 @RestController
 public class AuthController {
