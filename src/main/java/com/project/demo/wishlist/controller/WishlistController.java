@@ -37,8 +37,9 @@ public class WishlistController {
     }
 
     @GetMapping("wishlist/{productId}")
-    public ResponseIsExist CheckDuplication(@PathVariable("productId") int productId){
-        boolean isExist = this.wishlistService.isExistWishlist(productId, productId);
+    public ResponseIsExist CheckDuplication(HttpSession session, @PathVariable("productId") int productId){
+        User user = (User)session.getAttribute("user");
+        boolean isExist = this.wishlistService.isExistWishlist(user.getId(), productId);
         return new ResponseIsExist(isExist);
     }
 
