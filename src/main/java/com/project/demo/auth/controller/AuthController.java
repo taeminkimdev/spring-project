@@ -9,10 +9,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.project.demo.auth.domain.User;
 import com.project.demo.auth.dto.ResponseUser;
+import com.project.demo.auth.exceptions.LoginFail;
 import com.project.demo.auth.service.IAuthService;
 import com.project.demo.auth.service.AuthServiceImp;
-
-import com.project.demo.exceptions.LoginFail;
 
 @RestController
 public class AuthController {
