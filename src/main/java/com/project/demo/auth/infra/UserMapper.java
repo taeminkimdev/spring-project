@@ -1,4 +1,4 @@
-package com.project.demo.auth.infra.dataSource;
+package com.project.demo.auth.infra;
 
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
