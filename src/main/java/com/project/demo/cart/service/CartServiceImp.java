@@ -1,8 +1,10 @@
 package com.project.demo.cart.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
-import com.project.demo.cart.dto.CartDTO;
+import com.project.demo.cart.dto.InfraOptionDTO;
 import com.project.demo.cart.dto.InfraProductDTO;
 import com.project.demo.cart.dto.OptionDTO;
 import com.project.demo.cart.dto.ProductDTO;
@@ -20,9 +22,17 @@ public class CartServiceImp implements ICartService{
         this.optionMapper = optionMapper;    
     }
 
-    public CartDTO getCart(int productId, int optionId, int quantity) {
+    public ProductDTO getCart(int productId, int optionId, int quantity) {
         InfraProductDTO infraProductDTO = this.productMapper.findProduct(productId);
-        OptionDTO option = this.optionMapper.findOption(optionId);
+        InfraOptionDTO infraOptionDTO = this.optionMapper.findOption(optionId);
+
+        int totalPrice = infraOptionDTO.getPrice() * quantity;
+
+        OptionDTO option = new OptionDTO(
+            infraOptionDTO.getId(),
+            infraOptionDTO.getName(),
+            quantity,
+            totalPrice);
 
         ProductDTO product = new ProductDTO(
             infraProductDTO.getId(), 
@@ -30,8 +40,8 @@ public class CartServiceImp implements ICartService{
             infraProductDTO.getPrice(),
             infraProductDTO.getFee(), 
             infraProductDTO.getImg(), 
-            option);
+            List.of(option));
 
-        return new CartDTO(IdGenerator.createId(), quantity, product);
+        return product;
     }
 }
