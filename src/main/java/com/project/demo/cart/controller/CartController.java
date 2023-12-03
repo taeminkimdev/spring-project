@@ -3,6 +3,7 @@ package com.project.demo.cart.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.demo.cart.dto.CartDTO;
+import com.project.demo.cart.dto.RequestAppendCart;
 import com.project.demo.cart.dto.ResponseCarts;
 import com.project.demo.cart.service.ICartService;
 
@@ -11,11 +12,11 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
-import org.apache.ibatis.annotations.Delete;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
@@ -37,8 +38,8 @@ public class CartController {
     }
 
     @PostMapping("cart")
-    public void appendCart(HttpSession session, int productId, int optionId, int quantity) {
-        CartDTO cart = this.cartService.getCart(productId, optionId, quantity);
+    public void appendCart(HttpSession session, @RequestBody RequestAppendCart req) {
+        CartDTO cart = this.cartService.getCart(req.getProductId(), req.getOptionId(), req.getQuantity());
         
         List<CartDTO> carts = (List<CartDTO>)session.getAttribute("cart");
         if(carts == null) {
