@@ -17,4 +17,11 @@ public class OptionDTO {
     public String getName() { return this.name; }
     public int getQuantity() { return this.quantity; }
     public int getTotalPrice() { return this.totalPirce; }
+
+    public void setQauntity(int quantity) { 
+        int optionPrice = this.totalPirce / this.quantity;
+        this.quantity = quantity;
+        this.totalPirce = optionPrice * quantity;
+    }
+
 }
