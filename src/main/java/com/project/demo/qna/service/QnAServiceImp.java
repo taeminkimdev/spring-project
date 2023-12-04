@@ -23,17 +23,17 @@ public class QnAServiceImp implements IQnAService{
         return qna;
     }
 
-    public List<QnA> getQnAs() {
-        List<QnA> qnAs = this.qnAMapper.findQnAs();
+    public List<QnA> getQnAs(int userId) {
+        List<QnA> qnAs = this.qnAMapper.findQnAs(userId);
         for (QnA qna : qnAs) {
             qna.setAnswer();
         }
         return qnAs;
     }
 
-    public void createQnA(String question) {
+    public void createQnA(int userId, String question) {
         int id = IdGenerator.createId();
-        this.qnAMapper.createQnA(id, question, "", new Date());
+        this.qnAMapper.createQnA(id, userId, question, "", new Date());
     }
 
     public void deleteQnA(int id) {

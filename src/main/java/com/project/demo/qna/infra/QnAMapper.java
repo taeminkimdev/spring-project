@@ -14,14 +14,14 @@ import com.project.demo.qna.dto.QnA;
 
 @Mapper
 public interface QnAMapper {
-    @Select("SELECT id, question, answer, createAt FROM qna")
-    public List<QnA> findQnAs();
+    @Select("SELECT id, question, answer, createAt FROM qna WHERE userId = #{userId}")
+    public List<QnA> findQnAs(@Param("userId") int userId);
 
     @Select("SELECT id, question, answer, createAt FROM qna WHERE id = #{id}")
     public QnA findQnA(@Param("id") int id);
 
-    @Insert("INSERT INTO qna (id, question, answer, createAt) VALUE(#{id}, #{question}, #{answer}, #{createAt})")
-    public void createQnA(@Param("id") int id, @Param("question") String question, @Param("answer") String answer, @Param("createAt") Date createAt);
+    @Insert("INSERT INTO qna (id, userId, question, answer, createAt) VALUE(#{id}, #{userId}, #{question}, #{answer}, #{createAt})")
+    public void createQnA(@Param("id") int id, @Param("userId") int userId, @Param("question") String question, @Param("answer") String answer, @Param("createAt") Date createAt);
 
     @Delete("DELETE FROM qna WHERE id = #{id}")
     public void deleteQnA(@Param("id") int id);

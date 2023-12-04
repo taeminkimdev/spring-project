@@ -2,6 +2,8 @@ package com.project.demo.qna.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.demo.auth.domain.User;
 import com.project.demo.qna.dto.QnA;
 import com.project.demo.qna.dto.RequestQnA;
 import com.project.demo.qna.dto.ResponseQnA;
@@ -24,14 +27,17 @@ public class QnAController {
     }
 
     @GetMapping("QnA")
-    public ResponseQnA getQnAs() {
-        List<QnA> qnAs = this.QnAService.getQnAs();
+    public ResponseQnA getQnAs(HttpSession session) {
+        User user = (User)session.getAttribute("user");
+
+        List<QnA> qnAs = this.QnAService.getQnAs(user.getId());
         return new ResponseQnA(qnAs);
     }
 
     @PostMapping("QnA")
-    public void createQnA(@RequestBody RequestQnA req) {
-        this.QnAService.createQnA(req.getQuestion());
+    public void createQnA(HttpSession session, @RequestBody RequestQnA req) {
+        User user = (User)session.getAttribute("user");
+        this.QnAService.createQnA(user.getId(), req.getQuestion());
     }
 
     @GetMapping("QnA/{id}")
