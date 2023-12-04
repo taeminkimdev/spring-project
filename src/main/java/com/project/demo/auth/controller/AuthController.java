@@ -4,7 +4,6 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,6 +27,8 @@ public class AuthController {
 
     @PostMapping("login")
     public void login(HttpSession session, HttpServletResponse response, @RequestBody RequestLogin req) throws LoginFail{
+        System.out.println("username: " + req.getUsername());
+        System.out.println("username: "+ req.getPassword());
         User user = authService.login(req.getUsername(), req.getPassword());
         session.setAttribute("user", user);
 
