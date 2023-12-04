@@ -2,7 +2,7 @@ package com.project.demo.auth.service;
 import org.springframework.stereotype.Component;
 
 import com.project.demo.auth.domain.User;
-import com.project.demo.auth.exceptions.LoginFail;
+import com.project.demo.exceptions.LoginFail;
 import com.project.demo.auth.infra.UserMapper;
 import com.project.demo.auth.service.IAuthService;
 
@@ -16,7 +16,7 @@ public class AuthServiceImp implements IAuthService{
 
     public User login(String username, String password) throws LoginFail{
         User user = this.userMapper.findUserByUsername(username);
-        if(!user.comparePassword(password)){ throw new LoginFail(); }
+        if(user == null || !user.comparePassword(password)){ throw new LoginFail(); }
 
         return user;
     }

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.project.demo.auth.domain.User;
+import com.project.demo.exceptions.NotAllowedUser;
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.qna.dto.QnA;
 import com.project.demo.qna.dto.RequestQnA;
 import com.project.demo.qna.dto.ResponseQnA;
@@ -35,13 +37,16 @@ public class QnAController {
     }
 
     @PostMapping("QnA")
-    public void createQnA(HttpSession session, @RequestBody RequestQnA req) {
+    public void createQnA(HttpSession session, @RequestBody RequestQnA req) throws NotAllowedUser{
         User user = (User)session.getAttribute("user");
+        if(user == null) {
+            throw new NotAllowedUser();
+        }
         this.QnAService.createQnA(user.getId(), req.getQuestion());
     }
 
     @GetMapping("QnA/{id}")
-    public QnA getQnA(@PathVariable("id") int id) {
+    public QnA getQnA(@PathVariable("id") int id) throws NotExistResource{
         return this.QnAService.getQnA(id);
     }
 

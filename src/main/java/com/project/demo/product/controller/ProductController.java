@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.product.dto.ProductDetailDTO;
 import com.project.demo.product.dto.ResponseProducts;
 import com.project.demo.product.service.IProductService;
@@ -24,7 +25,7 @@ class ProductController {
     }
 
     @GetMapping("products/{productId}")
-    public ProductDetailDTO getProductDetail(@PathVariable("productId") int productId) {
+    public ProductDetailDTO getProductDetail(@PathVariable("productId") int productId) throws NotExistResource{
         return this.productService.getProduct(productId);
     }
 }

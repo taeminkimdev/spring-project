@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.qna.dto.QnA;
 import com.project.demo.qna.infra.QnAMapper;
 import com.project.demo.util.IdGenerator;
@@ -17,8 +18,12 @@ public class QnAServiceImp implements IQnAService{
         this.qnAMapper = qnAMapper;
     }
 
-    public QnA getQnA(int id) {
+    public QnA getQnA(int id) throws NotExistResource{
         QnA qna = this.qnAMapper.findQnA(id);
+        if(qna == null) {
+            throw new NotExistResource();
+        }
+
         qna.setAnswer();
         return qna;
     }

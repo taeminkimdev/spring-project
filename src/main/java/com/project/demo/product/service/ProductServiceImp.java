@@ -1,5 +1,6 @@
 package com.project.demo.product.service;
 import com.project.demo.product.dto.ProductDetailDTO;
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.product.dto.OptionDTO;
 import com.project.demo.product.dto.ProductDTO;
 import com.project.demo.product.infra.OptionMapper;
@@ -24,8 +25,11 @@ public class ProductServiceImp implements IProductService{
         return this.productMapper.findProducts();
     }
 
-    public ProductDetailDTO getProduct(int id) {
+    public ProductDetailDTO getProduct(int id) throws NotExistResource{
         ProductDTO productDTO = this.productMapper.findProduct(id);
+        if(productDTO == null) {
+            throw new NotExistResource();
+        }
         List<OptionDTO> options = this.optionMapper.findOptionsByProductId(id);
 
         return new ProductDetailDTO(productDTO, options);

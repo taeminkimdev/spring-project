@@ -2,12 +2,12 @@ package com.project.demo.cart.controller;
 
 import org.springframework.web.bind.annotation.RestController;
 
-import com.project.demo.cart.dto.OptionDTO;
 import com.project.demo.cart.dto.ProductDTO;
 import com.project.demo.cart.dto.RequestAppendCart;
 import com.project.demo.cart.dto.RequestUpdateCart;
 import com.project.demo.cart.dto.ResponseCarts;
 import com.project.demo.cart.service.ICartService;
+import com.project.demo.exceptions.NotExistResource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +47,7 @@ public class CartController {
     }
 
     @PostMapping("cart")
-    public void appendCart(HttpSession session, @RequestBody RequestAppendCart req) {
+    public void appendCart(HttpSession session, @RequestBody RequestAppendCart req) throws NotExistResource{
         ProductDTO cart = this.cartService.getCart(req.getProductId(), req.getOptionId(), req.getQuantity());
         
         List<ProductDTO> carts = (List<ProductDTO>)session.getAttribute("cart");

@@ -1,4 +1,4 @@
-package com.project.demo.auth.exceptions;
+package com.project.demo.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;

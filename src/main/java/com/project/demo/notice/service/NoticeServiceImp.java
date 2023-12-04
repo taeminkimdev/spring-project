@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.notice.dto.Notice;
 import com.project.demo.notice.infra.NoticeMapper;
 
@@ -15,8 +16,11 @@ public class NoticeServiceImp implements INoticeService{
         this.noticeMapper = noticeMapper;
     }
 
-    public Notice getNotice(int id) {
-        return this.noticeMapper.findNotice(id);
+    public Notice getNotice(int id) throws NotExistResource{
+        Notice notice = this.noticeMapper.findNotice(id);
+        if(notice == null) { throw new NotExistResource(); }
+
+        return notice;
     }
 
     public List<Notice> getNotices() {

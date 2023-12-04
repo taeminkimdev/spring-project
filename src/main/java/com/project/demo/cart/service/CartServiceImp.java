@@ -10,6 +10,7 @@ import com.project.demo.cart.dto.OptionDTO;
 import com.project.demo.cart.dto.ProductDTO;
 import com.project.demo.cart.infra.CartOptionMapper;
 import com.project.demo.cart.infra.CartProductMapper;
+import com.project.demo.exceptions.NotExistResource;
 import com.project.demo.util.IdGenerator;
 
 @Component
@@ -22,9 +23,13 @@ public class CartServiceImp implements ICartService{
         this.optionMapper = optionMapper;    
     }
 
-    public ProductDTO getCart(int productId, int optionId, int quantity) {
+    public ProductDTO getCart(int productId, int optionId, int quantity) throws NotExistResource{
         InfraProductDTO infraProductDTO = this.productMapper.findProduct(productId);
         InfraOptionDTO infraOptionDTO = this.optionMapper.findOption(optionId);
+        
+        if(infraOptionDTO == null || infraProductDTO == null) {
+            throw new NotExistResource();
+        }
 
         int totalPrice = infraOptionDTO.getPrice() * quantity;
 

@@ -2,7 +2,6 @@ package com.project.demo.wishlist.service;
 
 import java.util.List;
 
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.stereotype.Component;
 
 import com.project.demo.wishlist.dto.WishlistDTO;
