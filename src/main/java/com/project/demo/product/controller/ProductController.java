@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.project.demo.product.dto.ProductDetailDTO;
 import com.project.demo.product.dto.ResponseProducts;
 import com.project.demo.product.service.IProductService;
+import com.project.demo.util.IdGenerator;
 
 @RestController
 class ProductController {
@@ -18,6 +19,7 @@ class ProductController {
 
     @GetMapping("products")
     public ResponseProducts getProducts() {
+        System.out.println(IdGenerator.createId());
         return new ResponseProducts(this.productService.getProducts());
     }
 
